@@ -1,7 +1,7 @@
 {
   "name": "pattern-driven-todos-app-frontend",
-  "version": "0.2.1",
-  "description": "A todo list application demonstrating JavaScript/TypeScript design patterns (Singleton, Observer, Value Object, Memento, etc)",
+  "version": "0.3.0",
+  "description": "A todo list application demonstrating JavaScript/TypeScript design patterns with reusable Tailwind component system",
   "type": "module",
   "scripts": {
     "dev": "npm run build:css & serve src",
@@ -9,7 +9,10 @@
     "build:css:prod": "tailwindcss -i ./src/styles/main.css -o ./src/styles/output.css --minify",
     "docs:generate": "jsdoc -c jsdoc.json",
     "docs:md": "documentation build src/js/** -f md -o DOCUMENTATION.md",
-    "serve": "serve src"
+    "serve": "serve src",
+    "release:patch": "pnpm version patch && git push --follow-tags",
+    "release:minor": "pnpm version minor && git push --follow-tags",
+    "release:major": "pnpm version major && git push --follow-tags"
   },
   "keywords": [
     "todo",

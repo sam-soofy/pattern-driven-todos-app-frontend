@@ -2,4 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom component classes can go here if needed */
+@layer components {
+  .app-container {
+    @apply flex justify-center items-center min-h-screen bg-gray-100;
+  }
+
+  .card {
+    @apply bg-white p-6 rounded-lg shadow-md w-80;
+  }
+
+  .card-title {
+    @apply text-2xl font-bold mb-4 text-center text-gray-800;
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md mb-3 
+           focus:outline-none focus:ring-2 focus:ring-primary-500;
+  }
+
+  .btn {
+    @apply px-3 py-2 rounded-md transition-colors font-medium;
+  }
+
+  .btn-primary {
+    @apply btn w-full bg-primary-500 text-white hover:bg-primary-600;
+  }
+
+  .btn-danger {
+    @apply btn bg-danger-500 text-white text-sm hover:bg-danger-600;
+  }
+
+  .todo-item {
+    @apply flex justify-between items-center p-3 bg-gray-50 rounded-md 
+           border border-gray-200;
+  }
+
+  .todo-text {
+    @apply text-gray-700 flex-1;
+  }
+
+  .todo-list {
+    @apply space-y-2;
+  }
+}
