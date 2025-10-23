@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @fileoverview Main application entry point and DOM event handlers
  * @module app
@@ -14,11 +15,15 @@ globalThis.DOM = {};
 const DOM = globalThis.DOM;
 
 /**
+ * @type {TodoList}
+ */
+const todoList = TodoList.instance;
+
+/**
  * Renders the todo list to the DOM
  * @function
  */
 function renderTodoList() {
-  const todoList = TodoList.instance;
   DOM.todoList.innerHTML = "";
 
   todoList.items.forEach((item) => {
@@ -52,23 +57,22 @@ document.addEventListener("DOMContentLoaded", () => {
    * @type {HTMLInputElement}
    */
   DOM.todoInput = document.getElementById("todo-input");
-  
+
   /**
    * Button to add new todo items
    * @type {HTMLButtonElement}
    */
   DOM.addBtn = document.getElementById("add-btn");
-  
+
   /**
    * Unordered list container for todo items
    * @type {HTMLUListElement}
    */
   DOM.todoList = document.getElementById("todo-list");
 
-  const todoList = TodoList.instance;
-
   // Subscribe to todo list changes (Observer Pattern)
-  todoList.add(renderTodoList);
+  todoList.addObserver(renderTodoList);
+  console.log("\nDOM Loaded\n");
 
   /**
    * Handles click event on the add button
@@ -79,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const text = DOM.todoInput.value.trim();
     if (text) {
       const newItem = new TodoItem(text);
-      todoList.add(newItem);
+      const result = todoList.add(newItem);
       DOM.todoInput.value = "";
     }
   });
@@ -92,10 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
   DOM.todoList.addEventListener("click", (event) => {
     if (event.target.classList.contains("delete-btn")) {
       const text = event.target.dataset.text;
-      const item = todoList.find(text);
-      if (item) {
-        todoList.delete(item);
-      }
+      const result = todoList.deleteByText(text);
     }
   });
 
