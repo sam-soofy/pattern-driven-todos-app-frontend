@@ -74,7 +74,7 @@ class TodoList {
    * @static
    */
   static {
-    this.instance = new TodoList();
+    this.#instance = new TodoList();
   }
 
   /**
@@ -101,24 +101,28 @@ class TodoList {
 
   /**
    * Adds a new todo item to the list and notifies observers
+   * Each item (Todo) should be unique (based on value) and if not, it gets ignored
    * @param {TodoItem} item - The TodoItem to add
+   * @returns {boolean} True if item was added, false if already exists
    */
   add(item) {
+    if (this.exists(item)) return false;
     this.#data.add(item);
     this.notify();
+    return true;
   }
 
   /**
    * Deletes a todo item from the list and notifies observers
-   * @param {TodoItem} item - The TodoItem to delete
+   * @param {string} text - The text of the TodoItem to delete
    * @returns {boolean} True if item was deleted, false if not found
    */
-  delete(item) {
-    const deleted = this.#data.delete(item);
-    if (deleted) {
-      this.notify();
-    }
-    return deleted;
+  deleteByText(text) {
+    const item = this.findByText(text);
+    if (!item) return false;
+    this.#data.delete(item);
+    this.notify();
+    return true;
   }
 
   /**
@@ -126,8 +130,17 @@ class TodoList {
    * @param {string} text - The text to search for
    * @returns {TodoItem|undefined} The found TodoItem or undefined
    */
-  find(text) {
+  findByText(text) {
     return [...this.#data].find((item) => item.text === text);
+  }
+
+  /**
+   * Checks if a todo item exists in the list
+   * @param {TodoItem} item - The TodoItem to check
+   * @returns {boolean} True if item exists, false otherwise
+   */
+  exists(item) {
+    return [...this.#data].some((todo) => todo.equals(item));
   }
 
   /**
@@ -144,5 +157,9 @@ class TodoList {
 
 // Apply Observer Pattern mixin to TodoList
 Object.assign(TodoList.prototype, observerMixin);
+
+// Using setPrototypeOf instead of Object.assign, will set the mixin prototype to upper hand prototype chain
+// Avoiding prototype unwanted polymorphisms without overriding of properties
+// Object.setPrototypeOf(TodoList.prototype, Object.getPrototypeOf(observerMixin));
 
 export { TodoItem, TodoList };
