@@ -23,15 +23,15 @@ function renderTodoList() {
 
   todoList.items.forEach((item) => {
     const li = document.createElement("li");
-    li.className = "flex justify-between items-center p-3 bg-gray-50 rounded-md border border-gray-200";
+    li.className = "todo-item";
 
     const span = document.createElement("span");
     span.textContent = item.text;
-    span.className = "text-gray-700 flex-1";
+    span.className = "todo-text";
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
-    deleteBtn.className = "delete-btn px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transition-colors";
+    deleteBtn.className = "delete-btn btn-danger";
     deleteBtn.dataset.text = item.text;
 
     li.appendChild(span);

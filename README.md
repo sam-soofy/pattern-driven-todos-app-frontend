@@ -12,7 +12,8 @@ This project serves as a practical exercise to explore and implement various des
 - **Persistent State Management** - Singleton pattern ensures single source of truth
 - **Reactive UI Updates** - Observer pattern for automatic re-rendering
 - **Value-Based Equality** - Value Object pattern for TodoItem comparison
-- **Modern Styling** - Tailwind CSS for responsive, clean UI
+- **Reusable Tailwind Component System** - Custom theme and component classes for clean, maintainable styling
+- **Copy-Paste Ready Config** - Pre-configured Tailwind setup for future projects
 
 ## 🏗️ Design Patterns Implemented
 
@@ -44,7 +45,7 @@ Efficient event handling on dynamically created todo items.
 ## 📁 Project Structure
 
 ```
-todolist-manager-frontend/
+pattern-driven-todos-app-frontend/
 ├── src/                    # Source files (development)
 │   ├── js/
 │   │   ├── classes.js      # TodoItem & TodoList classes
@@ -140,7 +141,25 @@ View generated docs in the `docs/` folder or `DOCUMENTATION.md`.
 ## 🎨 Customization
 
 ### Styling
-Modify `src/styles/main.css` to add custom Tailwind utilities or components.
+
+This project uses a **reusable Tailwind component system** that you can copy to other projects:
+
+#### Custom Theme (`tailwind.config.js`)
+- **Color Palettes**: `primary` (blue tones) and `danger` (red tones) with full shade ranges
+- **Extended Spacing**: Additional spacing utilities (18, 88, 128)
+- **Typography**: Inter font family configuration
+
+#### Component Classes (`src/styles/main.css`)
+Pre-built component classes using `@layer` and `@apply`:
+- `.card`, `.card-title` - Card containers and headers
+- `.btn`, `.btn-primary`, `.btn-danger` - Button variants
+- `.input-field` - Form inputs with focus states
+- `.todo-item`, `.todo-text`, `.todo-list` - Todo-specific components
+
+**Benefits:**
+- Clean HTML without long utility chains
+- Consistent design system across the app
+- Easy to copy both files to new projects for instant styling setup
 
 ### Adding Features
 The modular structure makes it easy to extend:
@@ -170,7 +189,7 @@ MIT
 
 ## 🤝 Contributing
 
-This is a personal learning project, but suggestions and improvements are welcome!
+This is a personal learning project, but suggestions and improvements are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ---
 
