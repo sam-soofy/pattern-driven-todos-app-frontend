@@ -23,7 +23,7 @@ const observers = new Set();
  * instance.add(() => console.log('notified!'));
  * instance.notify(); // logs: 'notified!'
  */
-export const observerMixin = {
+const observerMixin = {
   /**
    * Adds an observer function to the observers set
    * @param {Function} obs - Observer callback function to be notified
@@ -47,3 +47,5 @@ export const observerMixin = {
     observers.forEach((obs) => obs());
   },
 };
+
+export { observerMixin };

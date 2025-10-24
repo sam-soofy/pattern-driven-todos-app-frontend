@@ -4,7 +4,9 @@
  * @module app
  */
 
-import { TodoItem, TodoList } from "./classes.js";
+import { CE, COMMANDS, Command } from "./lib/command.js";
+import { TodoItem, TodoList } from "./todo/classes.js";
+import { renderTodoList } from "./todo/render.js";
 
 /**
  * Global DOM elements cache
@@ -14,36 +16,7 @@ import { TodoItem, TodoList } from "./classes.js";
 globalThis.DOM = {};
 const DOM = globalThis.DOM;
 
-/**
- * @type {TodoList}
- */
 const todoList = TodoList.instance;
-
-/**
- * Renders the todo list to the DOM
- * @function
- */
-function renderTodoList() {
-  DOM.todoList.innerHTML = "";
-
-  todoList.items.forEach((item) => {
-    const li = document.createElement("li");
-    li.className = "todo-item";
-
-    const span = document.createElement("span");
-    span.textContent = item.text;
-    span.className = "todo-text";
-
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.className = "delete-btn btn-danger";
-    deleteBtn.dataset.text = item.text;
-
-    li.appendChild(span);
-    li.appendChild(deleteBtn);
-    DOM.todoList.appendChild(li);
-  });
-}
 
 /**
  * Initializes the application when DOM is ready.
@@ -72,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Subscribe to todo list changes (Observer Pattern)
   todoList.addObserver(renderTodoList);
-  console.log("\nDOM Loaded\n");
 
   /**
    * Handles click event on the add button
@@ -83,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const text = DOM.todoInput.value.trim();
     if (text) {
       const newItem = new TodoItem(text);
-      const result = todoList.add(newItem);
+      const result = CE.execute(new Command(COMMANDS.ADD_TODO, newItem));
       DOM.todoInput.value = "";
     }
   });
@@ -96,10 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
   DOM.todoList.addEventListener("click", (event) => {
     if (event.target.classList.contains("delete-btn")) {
       const text = event.target.dataset.text;
-      const result = todoList.deleteByText(text);
+      const result = CE.execute(
+        new Command(COMMANDS.REMOVE_TODO_BY_TEXT, text)
+      );
     }
   });
-
-  // Initial render
-  renderTodoList();
 });

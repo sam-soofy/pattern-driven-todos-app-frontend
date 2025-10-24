@@ -28,7 +28,7 @@ const todoList = TodoList.instance; // Always returns the same instance
 Implemented via mixin to enable reactive UI updates when data changes.
 
 ```javascript
-todoList.add(renderFunction); // Subscribe to changes
+todoList.addObserver(renderFunction); // Subscribe to changes
 todoList.notify(); // Notify all observers
 ```
 
@@ -39,7 +39,15 @@ todoList.notify(); // Notify all observers
 item1.equals(item2); // Compares by value, not reference
 ```
 
-### 4. Event Delegation
+### 4. Command Pattern
+Encapsulates operations as command objects executed through a Command Executor (CE).
+
+```javascript
+CE.execute(new Command(COMMANDS.ADD_TODO, newItem));
+CE.execute(new Command(COMMANDS.REMOVE_TODO_BY_TEXT, text));
+```
+
+### 5. Event Delegation
 Efficient event handling on dynamically created todo items.
 
 ## 📁 Project Structure
@@ -48,8 +56,12 @@ Efficient event handling on dynamically created todo items.
 pattern-driven-todos-app-frontend/
 ├── src/                    # Source files (development)
 │   ├── js/
-│   │   ├── classes.js      # TodoItem & TodoList classes
-│   │   ├── mixin.js        # Observer pattern implementation
+│   │   ├── todo/           # Todo-related modules
+│   │   │   ├── classes.js  # TodoItem & TodoList classes
+│   │   │   ├── mixin.js    # Observer pattern implementation
+│   │   │   └── render.js   # UI rendering logic
+│   │   ├── lib/            # Reusable libraries
+│   │   │   └── command.js  # Command pattern implementation
 │   │   └── app.js          # Main application & DOM logic
 │   ├── styles/
 │   │   ├── main.css        # Tailwind directives
