@@ -5,6 +5,7 @@
  */
 
 import { CE, COMMANDS, Command } from "./lib/command.js";
+import { LocalStorage } from "./lib/storage.js";
 import { TodoItem, TodoList } from "./todo/classes.js";
 import { renderTodoList } from "./todo/render.js";
 
@@ -43,9 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   DOM.todoList = document.getElementById("todo-list");
 
-  // Subscribe to todo list changes (Observer Pattern)
-  todoList.addObserver(renderTodoList);
-
   /**
    * Handles click event on the add button
    * Creates and adds a new TodoItem if input is not empty
@@ -73,4 +71,15 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
   });
+});
+
+/**
+ * Initializes the application when DOM is ready.
+ * Here we deal with loadings and attachments like observers
+ * @listens DOMContentLoaded
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  // Subscribe to todo list changes (Observer Pattern)
+  todoList.addObserver(renderTodoList);
+  LocalStorage.load();
 });
