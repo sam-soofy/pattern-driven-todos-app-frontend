@@ -6,6 +6,8 @@ A minimalist todo list application built with vanilla JavaScript, demonstrating 
 
 This project serves as a practical exercise to explore and implement various design patterns in JavaScript. Built with vanilla JS and styled with Tailwind CSS, it provides a clean, maintainable codebase suitable for learning and extension.
 
+Also, the app is designed and implemented in a way that decouples different logics carefully into different modules, making it easier to manage and test. This approach allows for better scalability and maintainability of the codebase, along with the mentioned patterns.
+
 ## ✨ Features
 
 - **Add/Delete Todo Items** - Simple and intuitive task management
