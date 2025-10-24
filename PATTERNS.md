@@ -12,6 +12,8 @@ Todos Managing App (frontend) implements these following key design patterns:
 5. **Event Delegation Pattern** - Efficient DOM event handling
 6. **Mixin Pattern** - Code reuse and composition
 
+The app is designed and implemented in a way that decouples different logics carefully into different modules, making it easier to manage and test. This approach allows for better scalability and maintainability of the codebase, along with the mentioned patterns.
+
 ---
 
 ## 1. Singleton Pattern
@@ -66,7 +68,7 @@ console.log(todoList1 === todoList2); // true
 
 **Location:** `src/js/todo/mixin.js` - `observerMixin`
 
-**Purpose:** Enables reactive UI updates by notifying all subscribers when the TodoList changes, without tight coupling between components.
+**Purpose:** Enables reactive UI updates by notifying all subscribers when the TodoList changes, without tight coupling between components. From version 1.1.0 to 1.2.0 we can see how easily we implemented and added storage functionalities to our app with ease, thanks to the Observer Pattern.
 
 ### Implementation
 
