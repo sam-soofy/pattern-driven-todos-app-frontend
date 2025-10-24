@@ -15,9 +15,10 @@ class Command {
 }
 
 /**
- * @typedef {Object} COMMANDS enumerates list of command types (names)
- * @property {string} ADD_TODO - The type (name) of command.
- * @property {string} REMOVE_TODO_BY_TEXT - The type (name) of command.
+ * @readonly
+ * @enum {string}
+ * @property {string} ADD_TODO - The type (name) of command. Command payload (TodoItem) must be provided.
+ * @property {string} REMOVE_TODO_BY_TEXT - The type (name) of command. Command payload (text) must be provided.
  * @property {string} UPDATE_TODO - The type (name) of command.
  * @property {string} CLEAR_TODO - The type (name) of command.
  */

@@ -58,7 +58,7 @@ class TodoList {
    * @readonly
    */
   get items() {
-    return this.#data;
+    return [...this.#data];
   }
 
   /**
