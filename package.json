@@ -1,6 +1,6 @@
 {
   "name": "pattern-driven-todos-app-frontend",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A todo list application demonstrating JavaScript/TypeScript design patterns with reusable Tailwind component system",
   "type": "module",
   "scripts": {
