@@ -20,6 +20,20 @@ const DOM = globalThis.DOM;
 const todoList = TodoList.instance;
 
 /**
+ * Common functionalities from & to DOM cross events
+ */
+
+function addTodo(text) {
+  text = text ? text : DOM.todoInput.value.trim();
+
+  if (text) {
+    const newItem = new TodoItem(text);
+    const result = CE.execute(new Command(COMMANDS.ADD_TODO, newItem));
+    DOM.todoInput.value = "";
+  }
+}
+
+/**
  * Initializes the application when DOM is ready.
  * Sets up event listeners and subscribes to todo list changes.
  * @listens DOMContentLoaded
@@ -50,12 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
    * @param {MouseEvent} event - The click event
    */
   DOM.addBtn.addEventListener("click", (event) => {
-    const text = DOM.todoInput.value.trim();
-    if (text) {
-      const newItem = new TodoItem(text);
-      const result = CE.execute(new Command(COMMANDS.ADD_TODO, newItem));
-      DOM.todoInput.value = "";
-    }
+    addTodo();
   });
 
   /**
@@ -66,9 +75,17 @@ document.addEventListener("DOMContentLoaded", () => {
   DOM.todoList.addEventListener("click", (event) => {
     if (event.target.classList.contains("delete-btn")) {
       const text = event.target.dataset.text;
-      const result = CE.execute(
-        new Command(COMMANDS.REMOVE_TODO_BY_TEXT, text)
-      );
+      const result = CE.execute(new Command(COMMANDS.REMOVE_TODO_BY_TEXT, text));
+    }
+  });
+
+  /**
+   * Handles Enter key press to add new todo item
+   * @param {KeyboardEvent} event - The keydown event
+   */
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      addTodo();
     }
   });
 });

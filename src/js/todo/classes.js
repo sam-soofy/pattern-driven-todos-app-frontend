@@ -74,7 +74,7 @@ class TodoList {
    * @static
    */
   static {
-    this.#instance = new TodoList();
+    TodoList.#instance = new TodoList();
   }
 
   /**
@@ -84,7 +84,7 @@ class TodoList {
    * @readonly
    */
   static get instance() {
-    return this.#instance;
+    return TodoList.#instance;
   }
 
   /**
@@ -94,9 +94,7 @@ class TodoList {
    */
   constructor() {
     if (TodoList.instance !== null)
-      throw new Error(
-        'Use the class "TodoList.instance" to get the single class instantiation.'
-      );
+      throw new Error('Use the class "TodoList.instance" to get the single class instantiation.');
   }
 
   /**
@@ -120,8 +118,10 @@ class TodoList {
   deleteByText(text) {
     const item = this.findByText(text);
     if (!item) return false;
+
     this.#data.delete(item);
     this.notify();
+
     return true;
   }
 
@@ -150,7 +150,10 @@ class TodoList {
   replaceList(list) {
     this.#data.clear();
     const items = Array.isArray(list) ? list : [...list];
-    items.forEach((item) => this.#data.add(item));
+    items.forEach((item) => {
+      const todoItem = new TodoItem(item.text, item.completed);
+      this.#data.add(todoItem);
+    });
     this.notify();
   }
 }

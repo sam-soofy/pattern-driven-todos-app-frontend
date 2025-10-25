@@ -64,6 +64,7 @@ pattern-driven-todos-app-frontend/
 │   │   │   └── render.js   # UI rendering logic
 │   │   ├── lib/            # Reusable libraries
 │   │   │   └── command.js  # Command pattern implementation
+│   │   │   └── storage.js  # Persistent storage implementation along with leveraging implemented patterns
 │   │   └── app.js          # Main application & DOM logic
 │   ├── styles/
 │   │   ├── main.css        # Tailwind directives
